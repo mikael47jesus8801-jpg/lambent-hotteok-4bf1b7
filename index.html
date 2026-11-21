@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<title>MS NEWS — Informação em movimento</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1a2b;--panel2:#12233a;--line:#21344d;--text:#f4f7fb;--muted:#9db0c7;--blue:#38bdf8;--red:#ff4057;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f3f6fa;color:#142033;font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+a{color:inherit;text-decoration:none}.top{background:var(--bg);color:white}.wrap{max-width:1180px;margin:auto;padding:0 22px}
+.mini{border-bottom:1px solid #1b2c41;color:#aebed0;font-size:12px}.mini .wrap{display:flex;justify-content:space-between;padding-top:9px;padding-bottom:9px;gap:12px}
+.brandrow{display:flex;align-items:center;justify-content:space-between;padding-top:22px;padding-bottom:18px;gap:20px}
+.logo{font-size:31px;font-weight:950;letter-spacing:-1.7px}.logo b{color:var(--blue)}.tag{font-size:10px;color:#a8b9cc;letter-spacing:2.2px;font-weight:700}
+.live{display:inline-flex;align-items:center;gap:8px;color:#fff;background:#301725;border:1px solid #6a2637;padding:7px 11px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:.8px}.dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px #ff405722}
+.search{display:flex;background:#14243a;border:1px solid #2b405b;border-radius:10px;overflow:hidden;max-width:330px;width:100%}.search input{min-width:0;flex:1;background:transparent;border:0;color:white;padding:11px 13px;outline:0}.search button{background:var(--blue);border:0;padding:0 14px;font-weight:800;cursor:pointer}
+nav{display:flex;gap:25px;overflow:auto;border-top:1px solid #1b2c41;white-space:nowrap}nav a{color:#c4d2e2;font-size:13px;font-weight:750;padding:14px 0;border-bottom:2px solid transparent}nav a.active,nav a:hover{color:white;border-color:var(--blue)}
+.ticker{background:#0d1a2b;color:white;border-top:1px solid #1b2c41}.ticker .wrap{display:flex;gap:14px;align-items:center;padding-top:10px;padding-bottom:10px;font-size:12px}.ticker strong{color:#ff687a;white-space:nowrap}
+main{max-width:1180px;margin:26px auto;padding:0 22px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:26px 0 15px}.sectionhead h2{font-size:19px;margin:0;letter-spacing:-.4px}.sectionhead h2:before{content:"";display:inline-block;width:4px;height:19px;background:var(--blue);margin-right:10px;vertical-align:-3px;border-radius:4px}
+.hero{display:grid;grid-template-columns:1.55fr 1fr;gap:18px}.lead{position:relative;min-height:390px;border-radius:16px;overflow:hidden;background:#14243a;color:white;display:flex;align-items:end}.lead img{position:absolute;width:100%;height:100%;object-fit:cover;inset:0;opacity:.64}.lead:after{content:"";position:absolute;inset:30% 0 0;background:linear-gradient(transparent,#06101e)}.leadcontent{position:relative;z-index:1;padding:28px;max-width:760px}.kicker{font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:var(--blue);font-weight:900}.lead h1{font-size:clamp(26px,4vw,43px);line-height:1.08;letter-spacing:-1.3px;margin:10px 0}.meta{font-size:12px;color:#d1dbea}.side{display:grid;gap:14px}.sidecard{background:white;border-radius:14px;overflow:hidden;display:grid;grid-template-columns:118px 1fr;min-height:118px;box-shadow:0 5px 18px #13243a0c}.sidecard img{width:100%;height:100%;object-fit:cover}.sidecard div{padding:13px}.sidecard h3{font-size:14px;line-height:1.25;margin:5px 0 8px}.sidecard .kicker{font-size:9px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.article{background:white;border:1px solid #e7edf4;border-radius:14px;overflow:hidden;transition:.2s;box-shadow:0 5px 20px #14243a08}.article:hover{transform:translateY(-3px);box-shadow:0 12px 28px #14243a14}.article img{width:100%;height:174px;object-fit:cover;background:#dce5ef}.articlebody{padding:15px}.article h3{font-size:17px;line-height:1.25;margin:7px 0 9px;letter-spacing:-.3px}.article p{color:#65758a;font-size:13px;margin:0 0 12px}.article .meta{color:#8391a3}.pill{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#087eae}
+.empty{grid-column:1/-1;text-align:center;padding:40px;background:white;border-radius:14px;color:#607187}.status{font-size:12px;color:var(--muted)}.status.ok{color:#11865b}.status.err{color:#c43d4b}
+.cta{background:linear-gradient(120deg,#0b1a2c,#133452);color:white;padding:24px;border-radius:16px;display:flex;justify-content:space-between;align-items:center;gap:18px;margin:28px 0}.cta h2{margin:0 0 5px}.cta p{margin:0;color:#b8c9db;font-size:13px}.cta button,.primary{background:var(--blue);color:#062033;border:0;padding:12px 17px;border-radius:9px;font-weight:900;cursor:pointer}
+footer{background:#07111f;color:#aab9ca;margin-top:45px;padding:35px 0}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot strong{color:white}.foot small{display:block;max-width:550px;margin-top:8px;line-height:1.6}
+.modalback{position:fixed;inset:0;background:#06101ed9;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal{background:white;border-radius:16px;padding:24px;max-width:520px;width:100%;max-height:90vh;overflow:auto}.modal h2{margin-top:0}.modal label{display:block;font-size:12px;font-weight:800;margin:14px 0 6px}.modal input{width:100%;padding:12px;border:1px solid #ccd6e2;border-radius:8px}.modal .hint{font-size:12px;color:#68788d;line-height:1.5}.modalactions{display:flex;gap:10px;margin-top:18px}.secondary{background:#e9eff6;border:0;padding:12px 16px;border-radius:9px;font-weight:800;cursor:pointer}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.lead{min-height:350px}.side{grid-template-columns:1fr 1fr}.grid{grid-template-columns:repeat(2,1fr)}.brandrow{flex-wrap:wrap}.search{max-width:none;order:3}.tag{display:none}}
+@media(max-width:540px){.wrap,main{padding-left:15px;padding-right:15px}.mini .wrap{font-size:10px}.brandrow{padding-top:16px}.logo{font-size:27px}.side{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.lead{min-height:340px}.leadcontent{padding:20px}.lead h1{font-size:29px}.sectionhead{margin-top:22px}.cta{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="mini"><div class="wrap"><span id="today">BRASIL • INFORMAÇÃO EM MOVIMENTO</span><span>Portal independente de notícias</span></div></div>
+ <div class="wrap brandrow">
+  <div><div class="logo">MS <b>NEWS</b></div><div class="tag">INFORMAÇÃO EM MOVIMENTO</div></div>
+  <div class="live"><i class="dot"></i> ACOMPANHAMENTO AO VIVO</div>
+  <form class="search" id="searchForm"><input id="searchInput" placeholder="Buscar notícias..." aria-label="Buscar notícias"><button>BUSCAR</button></form>
+ </div>
+ <div class="wrap"><nav id="nav">
+  <a href="#" class="active" data-cat="Todas">Início</a><a href="#" data-cat="Brasil">Brasil</a><a href="#" data-cat="Mundo">Mundo</a><a href="#" data-cat="Política">Política</a><a href="#" data-cat="Sergipe">Sergipe</a><a href="#" data-cat="Esportes">Esportes</a><a href="#" data-cat="Futebol">Futebol</a><a href="#" data-cat="Tecnologia">Tecnologia</a><a href="#" data-cat="Entretenimento">Entretenimento</a><a href="#" data-cat="Saúde">Saúde</a>
+ </nav></div>
+</header>
+<div class="ticker"><div class="wrap"><strong>GIRO MS</strong><span id="tickerText">Acompanhe as principais notícias do Brasil e do mundo.</span><span style="margin-left:auto;color:#7f94ad" id="updated">Aguardando atualização</span></div></div>
+<main>
+ <div class="sectionhead"><h2>DESTAQUES</h2><span class="status" id="feedStatus">Modo demonstração • configure uma API</span></div>
+ <section class="hero">
+  <article class="lead" id="lead">
+   <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=85" alt="Jornal sobre uma mesa">
+   <div class="leadcontent"><div class="kicker">MS NEWS • DESTAQUE</div><h1>Informação confiável para entender o que acontece.</h1><div class="meta">Configure sua fonte de notícias para carregar manchetes atualizadas.</div></div>
+  </article>
+  <div class="side" id="side">
+   <article class="sidecard"><img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400" alt=""><div><div class="kicker">BRASIL</div><h3>Notícias nacionais em um só lugar</h3><div class="meta">MS NEWS</div></div></article>
+   <article class="sidecard"><img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=400" alt=""><div><div class="kicker">MUNDO</div><h3>Acompanhe os acontecimentos internacionais</h3><div class="meta">MS NEWS</div></div></article>
+   <article class="sidecard"><img src="https://images.unsplash.com/photo-1467987506553-8f3916508521?w=400" alt=""><div><div class="kicker">TECNOLOGIA</div><h3>Inovação, ciência e tecnologia</h3><div class="meta">MS NEWS</div></div></article>
+   <article class="sidecard"><img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400" alt=""><div><div class="kicker">ESPORTES</div><h3>O que acontece no esporte</h3><div class="meta">MS NEWS</div></div></article>
+  </div>
+ </section>
+ <div class="sectionhead"><h2>ÚLTIMAS NOTÍCIAS</h2><span class="status" id="count">Conteúdo ilustrativo</span></div>
+ <section class="grid" id="articles">
+  <div class="article"><img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=700" alt=""><div class="articlebody"><div class="pill">INFORMAÇÃO</div><h3>As principais notícias aparecem aqui quando a API estiver conectada.</h3><p>Este conteúdo é apenas uma demonstração do layout e não representa uma notícia real.</p><div class="meta">MS NEWS • DEMONSTRAÇÃO</div></div></div>
+  <div class="article"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=700" alt=""><div class="articlebody"><div class="pill">SERGIPE</div><h3>Espaço dedicado às notícias de Sergipe e da região.</h3><p>Conecte uma fonte para receber manchetes publicadas por veículos jornalísticos.</p><div class="meta">MS NEWS • DEMONSTRAÇÃO</div></div></div>
+  <div class="article"><img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=700" alt=""><div class="articlebody"><div class="pill">TECNOLOGIA</div><h3>Atualizações de tecnologia, ciência e inovação.</h3><p>As matérias serão exibidas com título, resumo, fonte, data e link original.</p><div class="meta">MS NEWS • DEMONSTRAÇÃO</div></div></div>
+ </section>
+ <div class="cta"><div><h2>MS NEWS no seu ritmo.</h2><p>Atualize o feed, filtre por editoria e abra a publicação original na fonte.</p></div><button onclick="openSettings()">CONFIGURAR NOTÍCIAS</button></div>
+ <div class="sectionhead"><h2>TRANSPARÊNCIA</h2></div>
+ <p style="color:#66768a;font-size:13px;max-width:850px">O MS NEWS agrega manchetes e links de fontes externas. Quando uma publicação não fornece imagem, o portal usa uma imagem ilustrativa relacionada à editoria. Cada publicação mantém a identificação do veículo original. Imagens, textos e direitos permanecem com seus respectivos proprietários. O portal não deve republicar matérias completas sem autorização.</p>
+</main>
+<footer><div class="wrap foot"><div><div class="logo">MS <b style="color:#38bdf8">NEWS</b></div><small>Informação em movimento. Um portal independente para acompanhar o Brasil, Sergipe e o mundo.</small></div><div><strong>MS NEWS © 2026</strong><small>Protótipo funcional • Integração de notícias configurável</small></div></div></footer>
+<div class="modalback" id="settings">
+ <div class="modal"><h2>Conectar fonte de notícias</h2>
+  <p class="hint">O protótipo usa a GNews API. Crie uma conta e gere sua chave em <a href="https://gnews.io/" target="_blank" rel="noopener" style="color:#087eae;text-decoration:underline">gnews.io</a>. A chave digitada fica apenas neste navegador para teste local.</p>
+  <label for="apiKey">Sua chave GNews API</label><input id="apiKey" type="password" placeholder="Cole sua API key aqui">
+  <label for="country">País das fontes</label><input id="country" value="br" maxlength="2">
+  <label for="language">Idioma</label><input id="language" value="pt" maxlength="2">
+  <p class="hint">A conta gratuita da GNews tem atraso de 12 horas e limites de uso. Para notícias em tempo real e publicação em um site público, é necessário plano compatível e um backend que proteja a chave. Não publique a chave no código-fonte.</p>
+  <div class="modalactions"><button class="primary" onclick="saveSettings()">CONECTAR E ATUALIZAR</button><button class="secondary" onclick="closeSettings()">FECHAR</button></div>
+  <p class="hint" id="settingsMsg"></p>
+ </div>
+</div>
+<script>
+const demo = [
+ {title:"MS NEWS: seu portal está pronto para receber notícias",description:"Conecte uma API para substituir os exemplos por manchetes reais, com fonte e link para a publicação original.",image:"https://images.unsplash.com/photo-1495020689067-958852a7765e?w=900",source:{name:"MS NEWS"},publishedAt:new Date().toISOString(),url:"#",category:"Brasil"},
+ {title:"Acompanhe notícias de Sergipe",description:"A editoria regional pode reunir notícias sobre Capela, Aracaju e os demais municípios sergipanos.",image:"https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=900",source:{name:"MS NEWS"},publishedAt:new Date().toISOString(),url:"#",category:"Sergipe"},
+ {title:"Tecnologia, ciência e inovação",description:"Uma área para acompanhar as novidades que movimentam o setor de tecnologia.",image:"https://images.unsplash.com/photo-1518770660439-4636190af475?w=900",source:{name:"MS NEWS"},publishedAt:new Date().toISOString(),url:"#",category:"Tecnologia"}
+];
+let allArticles=[],activeCategory="Todas",query="";
+
+const fallbackImages = {
+  "Futebol": [
+    "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=900&q=80",
+    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&q=80"
+  ],
+  "Esportes": [
+    "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=900&q=80",
+    "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=900&q=80"
+  ],
+  "Sergipe": [
+    "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=900&q=80",
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900&q=80"
+  ],
+  "Brasil": [
+    "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=900&q=80",
+    "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=900&q=80"
+  ],
+  "Política": [
+    "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=900&q=80",
+    "https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9?w=900&q=80"
+  ],
+  "Mundo": [
+    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&q=80",
+    "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=900&q=80"
+  ],
+  "Tecnologia": [
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&q=80"
+  ],
+  "Entretenimento": [
+    "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=900&q=80",
+    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80"
+  ],
+  "Saúde": [
+    "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=900&q=80",
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80"
+  ],
+  "default": [
+    "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=900&q=80",
+    "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80"
+  ]
+};
+const usedImages = new Set();
+function imageForArticle(article, index=0) {
+  const category = article.category || "default";
+  const options = fallbackImages[category] || fallbackImages.default;
+  let chosen = article.image || "";
+  if (chosen && usedImages.has(chosen)) chosen = "";
+  if (!chosen) {
+    const start = Math.abs(index) % options.length;
+    chosen = options.find((url, offset) => !usedImages.has(options[(start + offset) % options.length])) || options[start];
+  }
+  usedImages.add(chosen);
+  return chosen;
+}
+function resetImageUsage(){ usedImages.clear(); }
+
+const $=id=>document.getElementById(id);
+function openSettings(){$("settings").style.display="flex";$("apiKey").value=localStorage.getItem("msnews_key")||""}
+function closeSettings(){$("settings").style.display="none"}
+function saveSettings(){const key=$("apiKey").value.trim();if(!key){$("settingsMsg").textContent="Insira sua chave para conectar.";return}localStorage.setItem("msnews_key",key);localStorage.setItem("msnews_country",$("country").value.trim()||"br");localStorage.setItem("msnews_lang",$("language").value.trim()||"pt");closeSettings();loadNews()}
+function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function timeAgo(date){const mins=Math.max(0,Math.floor((Date.now()-new Date(date).getTime())/60000));if(!Number.isFinite(mins))return "Data não informada";if(mins<1)return "Agora";if(mins<60)return `Há ${mins} min`;const h=Math.floor(mins/60);if(h<24)return `Há ${h} h`;return new Date(date).toLocaleDateString("pt-BR")}
+function card(a,index=0){
+ const src=a.source?.name||"Fonte externa";
+ const image=imageForArticle(a,index);
+ return `<article class="article"><a href="${esc(a.url||"#")}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(image)}" onerror="this.onerror=null;this.style.visibility='hidden'" alt="${esc(a.category||"Notícia")}"><div class="articlebody"><div class="pill">${esc(a.category||"Notícias")}</div><h3>${esc(a.title||"Sem título")}</h3><p>${esc(a.description||"Leia a publicação original na fonte.")}</p><div class="meta">${esc(src)} • ${esc(timeAgo(a.publishedAt))} ↗</div></div></a></article>`
+}
+function render(){
+ let list=allArticles.filter(a=>(activeCategory==="Todas"||a.category===activeCategory)&&(!query||`${a.title} ${a.description} ${a.source?.name}`.toLowerCase().includes(query)));
+ $("count").textContent=`${list.length} publicação(ões)`;
+ if(!list.length){$("articles").innerHTML='<div class="empty">Nenhuma notícia encontrada. Tente outra busca ou editoria.</div>';return}
+ resetImageUsage(); const lead=list[0]; const leadImage=imageForArticle(lead,0); $("lead").innerHTML=`<img src="${esc(leadImage)}" onerror="this.onerror=null;this.style.display='none'" alt="${esc(lead.category||"Destaque")}"><div class="leadcontent"><div class="kicker">${esc(lead.category||"DESTAQUE")} • MS NEWS</div><h1>${esc(lead.title)}</h1><div class="meta">${esc(lead.source?.name||"Fonte externa")} • ${esc(timeAgo(lead.publishedAt))} • <a href="${esc(lead.url||"#")}" target="_blank" rel="noopener">Ler na fonte ↗</a></div></div>`;
+ $("articles").innerHTML=list.slice(1).map((a,i)=>card(a,i+1)).join("")||card(lead,1);
+ $("tickerText").textContent=list.slice(0,3).map(a=>a.title).join("  •  ")||"Sem manchetes para exibir";
+}
+async function loadNews(){
+ const key=localStorage.getItem("msnews_key");if(!key){$("feedStatus").textContent="Modo demonstração • configure uma API";$("feedStatus").className="status";allArticles=demo;render();return}
+ $("feedStatus").textContent="Buscando notícias…";$("feedStatus").className="status";
+ try{
+  const country=localStorage.getItem("msnews_country")||"br",lang=localStorage.getItem("msnews_lang")||"pt";
+  const url=`https://gnews.io/api/v4/top-headlines?country=${encodeURIComponent(country)}&lang=${encodeURIComponent(lang)}&max=10&apikey=${encodeURIComponent(key)}`;
+  const res=await fetch(url);if(!res.ok)throw new Error(res.status===403?"Limite/plano da API ou chave inválida.":`Erro da API (${res.status})`);
+  const data=await res.json();allArticles=(data.articles||[]).map(a=>({...a,category:activeCategory==="Todas"?"Brasil":activeCategory}));
+  if(!allArticles.length)throw new Error("A API não retornou notícias.");
+  $("feedStatus").textContent="Fonte conectada • atualização automática a cada 5 minutos";$("feedStatus").className="status ok";$("updated").textContent="Atualizado às "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});render()
+ }catch(e){$("feedStatus").textContent=e.message+" • confira sua configuração";$("feedStatus").className="status err";$("settingsMsg").textContent=e.message}
+}
+$("nav").addEventListener("click",e=>{const a=e.target.closest("a[data-cat]");if(!a)return;e.preventDefault();activeCategory=a.dataset.cat;document.querySelectorAll("nav a").forEach(x=>x.classList.toggle("active",x===a));if(activeCategory!=="Todas"&&localStorage.getItem("msnews_key")){query=activeCategory==="Sergipe"?"Sergipe":activeCategory==="Futebol"?"Flamengo OR futebol Sergipe OR Campeonato Brasileiro":activeCategory;$("searchInput").value="";searchApi(query)}else render()});
+$("searchForm").addEventListener("submit",e=>{e.preventDefault();query=$("searchInput").value.trim().toLowerCase();if(localStorage.getItem("msnews_key")&&query)searchApi($("searchInput").value.trim());else render()});
+async function searchApi(q){const key=localStorage.getItem("msnews_key");if(!key){render();return} $("feedStatus").textContent="Pesquisando…";try{const lang=localStorage.getItem("msnews_lang")||"pt";const u=`https://gnews.io/api/v4/search?q=${encodeURIComponent(q)}&lang=${lang}&max=10&sortby=publishedAt&apikey=${encodeURIComponent(key)}`;const r=await fetch(u);if(!r.ok)throw new Error("Não foi possível pesquisar agora.");const d=await r.json();allArticles=(d.articles||[]).map(a=>({...a,category:activeCategory==="Todas"?"Busca":activeCategory}));query="";$("feedStatus").textContent="Resultados da busca";$("feedStatus").className="status ok";render()}catch(e){$("feedStatus").textContent=e.message;$("feedStatus").className="status err"}}
+$("today").textContent=new Date().toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"long",year:"numeric"}).toUpperCase();
+allArticles=demo;render();if(localStorage.getItem("msnews_key"))loadNews();setInterval(()=>{if(localStorage.getItem("msnews_key"))loadNews()},300000);
+</script>
+</body></html>
